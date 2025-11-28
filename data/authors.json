@@ -1,0 +1,17 @@
+[
+  {
+    "id": "1",
+    "name": "Gabriel García Márquez",
+    "nationality": "Colombiana"
+  },
+  {
+    "id": "2",
+    "name": "Miguel de Cervantes",
+    "nationality": "Española"
+  },
+  {
+    "id": "3",
+    "name": "Edgar Allan Poe",
+    "nationality": "Estadounidense"
+  }
+]

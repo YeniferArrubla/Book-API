@@ -1,0 +1,18 @@
+[
+    {
+        "id": "1",
+        "name": "Editorial Sudamericana",
+        "country": "Argentina"
+        
+    },
+    {
+        "id": "2",
+        "name": "Francisco de Robles",
+        "country": "Spain"
+    },
+    {
+        "id": "3",
+        "name": "Burton's Gentlemen's Magazine",
+        "country": "United States"
+    }
+]
