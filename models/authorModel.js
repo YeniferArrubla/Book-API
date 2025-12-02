@@ -55,9 +55,17 @@ function addAuthor(authorData) {
     return null; // Retorna null si hubo un error al guardar
 }
 
+// Busca autor por nombre (case-insensitive)
+function findAuthorByName(name) {
+  if (!name) 
+    return null;
+  const authors = getAuthors();
+  return authors.find(a => a.name && a.name.toLowerCase() === name.toLowerCase()) || null;
+}
+
 // Exportamos las funciones para que el controlador pueda usarlas
 module.exports = {
     getAllAuthors,
     addAuthor,
-    // Aquí agregarías findAuthorById, updateAuthor, etc.
+    findAuthorByName,
 };

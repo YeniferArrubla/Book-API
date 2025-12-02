@@ -1,0 +1,43 @@
+module.exports = {
+    // Lista bonita sin mostrar JSON
+    formatList(items, label) {
+        if (!items || items.length === 0) {
+            return `No hay ${label} registrados.\n`;
+        }
+
+        let output = `Lista de ${label}:\n`;
+
+        items.forEach((item, index) => {
+            if (label === 'libros') {
+                output += `${index + 1}. ${item.title} (${item.year})\n`;
+            } else if (label === 'autores') {
+                output += `${index + 1}. ${item.name}\n`;
+            } else if (label === 'editoriales') {
+                output += `${index + 1}. ${item.name}\n`;
+            }
+        });
+
+        return output;
+    },
+
+    // Para confirmar creación de autor/editorial/libro
+    formatCreated(label, item) {
+        if (label === 'autor') {
+            return `✔️ Autor creado: ${item.name}\n`;
+        }
+        if (label === 'editorial') {
+            return `✔️ Editorial creada: ${item.name}\n`;
+        }
+        if (label === 'libro') {
+            return (
+                `\n   ✔️ Libro agregado correctamente:\n` +
+                `   📚 Título: ${item.title}\n` +
+                `   🗓️ Año: ${item.year}\n` +
+                `   ✍️ Autor: ${item.authorName}\n` +
+                `   🏢 Editorial: ${item.publisherName}\n\n`
+            );
+        }
+
+        return 'Elemento creado correctamente.\n';
+    }
+};

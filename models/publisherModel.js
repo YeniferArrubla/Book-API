@@ -51,8 +51,14 @@ function addPublisher(publisherData) {
     return null;
 }
 
+function findPublisherByName(name) {
+  if (!name) return null;
+  const publishers = getPublishers();
+  return publishers.find(p => p.name && p.name.toLowerCase() === name.toLowerCase()) || null;
+}
+
 module.exports = {
     getAllPublishers,
     addPublisher,
-    // Aquí agregarías findPublisherById, updatePublisher, etc.
+    findPublisherByName,
 };
