@@ -1,60 +1,56 @@
 const fs = require('fs');
 const path = require('path');
-const { v4: uuidv4 } = require('uuid'); 
+const { v4: uuidv4 } = require('uuid');
 
-// Ruta al archivo JSON de editoriales
 const PUBLISHERS_FILE = path.join(__dirname, '..', 'data', 'publishers.json');
 
-// Función para LEER el archivo JSON
-function getPublishers() {
+function readPublishers() {
     try {
         const data = fs.readFileSync(PUBLISHERS_FILE, 'utf8');
         return JSON.parse(data || '[]');
     } catch (error) {
-        console.error('Error al leer publishers.json:', error.message);
+        console.error('Error reading publishers.json:', error.message);
         return [];
     }
 }
 
-// Función para ESCRIBIR en el archivo JSON
 function savePublishers(publishers) {
     try {
-        const data = JSON.stringify(publishers, null, 2);
-        fs.writeFileSync(PUBLISHERS_FILE, data, 'utf8');
+        fs.writeFileSync(PUBLISHERS_FILE, JSON.stringify(publishers, null, 2), 'utf8');
         return true;
     } catch (error) {
-        console.error('Error al escribir en publishers.json:', error.message);
+        console.error('Error writing to publishers.json:', error.message);
         return false;
     }
 }
 
-// Implementación de la función requerida (GET PUBLISHERS)
 function getAllPublishers() {
-    return getPublishers();
+    return readPublishers();
 }
 
-// Implementación de la función requerida (ADD PUBLISHER)
 function addPublisher(publisherData) {
-    const publishers = getPublishers();
-    
-    // Validar si ya existe un campo id en el JSON, sino genera uno nuevo
-    const newPublisher = { 
-        id: uuidv4(), 
-        ...publisherData 
-    };
-    
-    publishers.push(newPublisher);
-    
-    if (savePublishers(publishers)) {
-        return newPublisher;
+    try {
+        const publishers = readPublishers();
+        const newPublisher = { id: uuidv4(), ...publisherData };
+        publishers.push(newPublisher);
+
+        return savePublishers(publishers) ? newPublisher : null;
+    } catch (error) {
+        console.error('Error adding new publisher:', error.message);
+        return null;
     }
-    return null;
 }
 
 function findPublisherByName(name) {
-  if (!name) return null;
-  const publishers = getPublishers();
-  return publishers.find(p => p.name && p.name.toLowerCase() === name.toLowerCase()) || null;
+    if (!name) return null;
+
+    try {
+        const publishers = readPublishers();
+        return publishers.find(p => p.name?.toLowerCase() === name.toLowerCase()) || null;
+    } catch (error) {
+        console.error('Error searching publisher by name:', error.message);
+        return null;
+    }
 }
 
 module.exports = {

@@ -1,28 +1,67 @@
-// controllers/publisherController.js
 const publisherModel = require('../models/publisherModel');
 
-function getPublishers() {
-    console.log('Controller: getPublishers()');
-    return publisherModel.getAllPublishers();
+function listPublishers() {
+    try {
+        return publisherModel.getAllPublishers();
+    } catch (error) {
+        return { error: 'Error al listar las editoriales: ' + error.message };
+    }
 }
 
 function addPublisher(publisherData) {
-    if (!publisherData || !publisherData.name) {
-        return { error: 'Faltan datos: name es obligatorio' };
-    }
+    try {
+        // Validación de duplicado
+        const exists = publisherModel.findPublisherByName(publisherData.name);
+        if (exists) {
+            return { error: 'La editorial ya existe' };
+        }
 
-    console.log('Controller: addPublisher()');
-    const created = publisherModel.addPublisher(publisherData);
-    if (!created) return { error: 'Error al guardar editorial' };
-    return created;
+        return publisherModel.addPublisher(publisherData);
+    } catch (error) {
+        return { error: 'Error al agregar la editorial: ' + error.message };
+    }
 }
 
-function findPublisherByName(name) {
-  return publisherModel.findPublisherByName(name);
+function getPublisherById(id) {
+    try {
+        const publisher = publisherModel.findPublisherById(id);
+        if (!publisher) {
+            return { error: 'Editorial no encontrada' };
+        }
+        return publisher;
+    } catch (error) {
+        return { error: 'Error al obtener la editorial: ' + error.message };
+    }
+}
+
+function updatePublisher(id, newData) {
+    try {
+        const updated = publisherModel.updatePublisher(id, newData);
+        if (!updated) {
+            return { error: 'Editorial no encontrada' };
+        }
+        return updated;
+    } catch (error) {
+        return { error: 'Error al actualizar la editorial: ' + error.message };
+    }
+}
+
+function deletePublisher(id) {
+    try {
+        const deleted = publisherModel.deletePublisher(id);
+        if (!deleted) {
+            return { error: 'Editorial no encontrada' };
+        }
+        return deleted;
+    } catch (error) {
+        return { error: 'Error al eliminar la editorial: ' + error.message };
+    }
 }
 
 module.exports = {
-    getPublishers,
+    listPublishers,
     addPublisher,
-    findPublisherByName,
+    getPublisherById,
+    updatePublisher,
+    deletePublisher
 };
