@@ -9,9 +9,11 @@ module.exports = {
 
         items.forEach((item, index) => {
             if (label === 'libros') {
-                output += `${index + 1}. ${item.title} (${item.year})\n`;
+                // Mostrar título (año) - autor - editorial
+                output += `${index + 1}. ${item.title} (${item.year}) — ${item.authorName} — ${item.publisherName}\n`;
             } else if (label === 'autores') {
-                output += `${index + 1}. ${item.name}\n`;
+                // Mostrar nombre (nacionalidad opcional)
+                output += `${index + 1}. ${item.name}${item.nationality ? ' (' + item.nationality + ')' : ''}\n`;
             } else if (label === 'editoriales') {
                 output += `${index + 1}. ${item.name}\n`;
             }
@@ -30,11 +32,11 @@ module.exports = {
         }
         if (label === 'libro') {
             return (
-                `\n   ✔️ Libro agregado correctamente:\n` +
-                `   📚 Título: ${item.title}\n` +
-                `   🗓️ Año: ${item.year}\n` +
-                `   ✍️ Autor: ${item.authorName}\n` +
-                `   🏢 Editorial: ${item.publisherName}\n\n`
+                `\n   ✔️    Libro agregado correctamente:\n` +
+                `   📚  Título: ${item.title}\n` +
+                `   🗓️  Año: ${item.year}\n` +
+                `   ✍️  Autor: ${item.authorName}\n` +
+                `   🏢  Editorial: ${item.publisherName}\n\n`
             );
         }
 

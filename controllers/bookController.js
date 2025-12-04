@@ -1,62 +1,89 @@
-// controllers/bookController.js
 const bookModel = require('../models/booksModel');
 const authorModel = require('../models/authorModel');
 const publisherModel = require('../models/publisherModel');
 
+// Listar libros
 function listBooks() {
-    return bookModel.getAllBooks();
+    try {
+        console.log('controller: listBooks()');
+        return bookModel.getAllBooks();
+    } catch (error) {
+        console.error('Controller error listBooks:', error.message);
+        return { error: 'Error interno al listar libros' };
+    }
 }
 
+// Añadir libro; recibe { title, year, authorName, publisherName }
+// Crea autor/editorial si no existen y usa sus ids
 function addBook(data) {
-    const { title, year, authorName, publisherName } = data;
+    try {
+        console.log('controller: addBook()');
 
-    if (!title) return { error: 'Falta el título' };
-    if (!year) return { error: 'Falta el año' };
-    if (!authorName) return { error: 'Falta el nombre del autor' };
-    if (!publisherName) return { error: 'Falta el nombre de la editorial' };
+        const title = (data.title || '').trim();
+        const year = data.year;
+        const authorName = (data.authorName || '').trim();
+        const publisherName = (data.publisherName || '').trim();
 
-    // Buscar autor
-    let author = authorModel.findAuthorByName(authorName);
+        if (!title) return { error: 'Falta title' };
+        if (!year) return { error: 'Falta year' };
+        if (!authorName) return { error: 'Falta authorName' };
+        if (!publisherName) return { error: 'Falta publisherName' };
 
-    // Si no existe → crearlo
-    if (!author) {
-        author = authorModel.addAuthor({ name: authorName });
-    }
+        // Buscar/crear autor
+        let author = authorModel.findAuthorByName(authorName);
+        if (!author) {
+            author = authorModel.addAuthor({ name: authorName });
+            if (!author) return { error: 'No se pudo crear autor' };
+        }
 
-    // Buscar editorial
-    let publisher = publisherModel.findPublisherByName(publisherName);
+        // Buscar/crear editorial
+        let publisher = publisherModel.findPublisherByName(publisherName);
+        if (!publisher) {
+            publisher = publisherModel.addPublisher({ name: publisherName });
+            if (!publisher) return { error: 'No se pudo crear editorial' };
+        }
 
-    // Si no existe → crearla
-    if (!publisher) {
-        publisher = publisherModel.addPublisher({ name: publisherName });
-    }
-
-    // Validar duplicado del libro (título + autor)
-    const allBooks = bookModel.getAllBooks();
-    const duplicate = allBooks.find(
-        (b) =>
-            b.title.toLowerCase() === title.toLowerCase() &&
+        // Validar duplicado: mismo título y mismo authorId
+        const allBooks = bookModel.getAllBooks();
+        const duplicate = allBooks.find(b =>
+            b.title && b.title.toLowerCase() === title.toLowerCase() &&
             b.authorId === author.id
-    );
+        );
+        if (duplicate) return { error: 'El libro ya existe para ese autor' };
 
-    if (duplicate) {
-        return { error: 'El libro ya existe con ese autor.' };
+        // Crear libro (bookModel genera id)
+        const created = bookModel.addBook({
+            title,
+            year,
+            authorId: author.id,
+            authorName: author.name,
+            publisherId: publisher.id,
+            publisherName: publisher.name
+        });
+
+        if (!created) return { error: 'Error al guardar libro' };
+
+        return created;
+    } catch (error) {
+        console.error('Controller error addBook:', error.message);
+        return { error: 'Error interno al agregar libro' };
     }
+}
 
-    // Crear libro con ids automáticos
-    const created = bookModel.addBook({
-        title,
-        year,
-        authorId: author.id,
-        authorName: author.name,
-        publisherId: publisher.id,
-        publisherName: publisher.name
-    });
-
-    return created || { error: 'Error al guardar el libro' };
+// Buscar libros por término (título o autor) -> devuelve array
+function searchBooks(term) {
+    try {
+        console.log('controller: searchBooks()');
+        if (!term) return [];
+        return bookModel.searchBooksByTerm(term);
+    } catch (error) {
+        console.error('Controller error searchBooks:', error.message);
+        return [];
+    }
 }
 
 module.exports = {
     listBooks,
-    addBook
+    addBook,
+    searchBooks
 };

@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "id": "b5958325-54ec-4d9c-b407-543c1a2f64ed",
+    "title": "El león, la bruja y el ropero",
+    "year": "1950",
+    "authorId": "8ffafd15-3040-460b-8844-f15c109b7901",
+    "authorName": "C.S. Lewis",
+    "publisherId": "a336416d-192c-48fe-a97e-7065eebd6107",
+    "publisherName": "Harper Collins"
+  },
+  {
+    "id": "ee765756-f65f-4cab-879d-9c7903790fe8",
+    "title": "Cien años de soledad",
+    "year": "1967",
+    "authorId": "c911c0e7-a797-404e-8069-f35b90c52298",
+    "authorName": "Gabriel García Marquez",
+    "publisherId": "e8b0fda4-9589-4b7a-a34e-54baeb00a289",
+    "publisherName": "Sudamericana"
+  },
+  {
+    "id": "a815146a-394b-4c65-b36d-711f907d01b9",
+    "title": "Don quijote de la mancha",
+    "year": "1605",
+    "authorId": "c3949dbb-d4e1-49da-b843-a2ac62d5711e",
+    "authorName": "Miguel de Cervantes",
+    "publisherId": "07fa0cc7-3dd5-424c-8c03-020ce853b618",
+    "publisherName": "Juan de la Cuesta"
+  },
+  {
+    "id": "a23a0f0d-82a3-4198-8b5c-f1ef955ce82f",
+    "title": "Orgullo y prejuicio",
+    "year": "1813",
+    "authorId": "91d99b88-e7c4-49b7-8a39-eb4130337697",
+    "authorName": "Jane Austen",
+    "publisherId": "0a219437-10f7-4ccc-9a86-2f766f0bed34",
+    "publisherName": "Austral"
+  }
+]

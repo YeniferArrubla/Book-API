@@ -1,3 +1,4 @@
+// client.js
 const net = require('net');
 const readline = require('readline');
 
@@ -46,7 +47,7 @@ client.on('error', (err) => {
 function showMenu() {
     console.log('\n📘 **COMANDOS DISPONIBLES**');
     console.log(
-        "GET BOOKS | GET AUTHORS | GET PUBLISHERS\n" +
+        "GET BOOKS | GET AUTHORS | GET PUBLISHERS | SEARCH BOOK | SEARCH AUTHOR\n" +
         "ADD BOOK | ADD AUTHOR | ADD PUBLISHER | EXIT\n"
     );
 
@@ -60,5 +61,4 @@ function showMenu() {
             // Dejamos que el servidor cierre la conexión con su mensaje
         }
     });
-}
-
+};

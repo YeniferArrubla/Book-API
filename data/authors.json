@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "8ffafd15-3040-460b-8844-f15c109b7901",
+    "name": "C.S. Lewis",
+    "nationality": ""
+  },
+  {
+    "id": "c911c0e7-a797-404e-8069-f35b90c52298",
+    "name": "Gabriel García Marquez",
+    "nationality": ""
+  },
+  {
+    "id": "c3949dbb-d4e1-49da-b843-a2ac62d5711e",
+    "name": "Miguel de Cervantes",
+    "nationality": ""
+  },
+  {
+    "id": "91d99b88-e7c4-49b7-8a39-eb4130337697",
+    "name": "Jane Austen",
+    "nationality": ""
+  }
+]

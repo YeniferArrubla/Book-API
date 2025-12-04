@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "a336416d-192c-48fe-a97e-7065eebd6107",
+    "name": "Harper Collins"
+  },
+  {
+    "id": "e8b0fda4-9589-4b7a-a34e-54baeb00a289",
+    "name": "Sudamericana"
+  },
+  {
+    "id": "07fa0cc7-3dd5-424c-8c03-020ce853b618",
+    "name": "Juan de la Cuesta"
+  },
+  {
+    "id": "0a219437-10f7-4ccc-9a86-2f766f0bed34",
+    "name": "Austral"
+  }
+]

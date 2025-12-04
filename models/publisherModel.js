@@ -31,9 +31,11 @@ function getAllPublishers() {
 function addPublisher(publisherData) {
     try {
         const publishers = readPublishers();
-        const newPublisher = { id: uuidv4(), ...publisherData };
+        const newPublisher = {
+            id: uuidv4(),
+            name: (publisherData.name || '').trim()
+        };
         publishers.push(newPublisher);
-
         return savePublishers(publishers) ? newPublisher : null;
     } catch (error) {
         console.error('Error adding new publisher:', error.message);
@@ -43,12 +45,23 @@ function addPublisher(publisherData) {
 
 function findPublisherByName(name) {
     if (!name) return null;
-
     try {
         const publishers = readPublishers();
-        return publishers.find(p => p.name?.toLowerCase() === name.toLowerCase()) || null;
+        const target = name.trim().toLowerCase();
+        return publishers.find(p => p.name && p.name.toLowerCase() === target) || null;
     } catch (error) {
         console.error('Error searching publisher by name:', error.message);
+        return null;
+    }
+}
+
+function findPublisherById(id) {
+    if (!id) return null;
+    try {
+        const publishers = readPublishers();
+        return publishers.find(p => p.id === id) || null;
+    } catch (error) {
+        console.error('Error searching publisher by id:', error.message);
         return null;
     }
 }
@@ -57,4 +70,5 @@ module.exports = {
     getAllPublishers,
     addPublisher,
     findPublisherByName,
+    findPublisherById
 };
