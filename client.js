@@ -1,64 +1,89 @@
-// client.js
 const net = require('net');
 const readline = require('readline');
 
 const rl = readline.createInterface({
     input: process.stdin,
-    output: process.stdout
+    output: process.stdout,
+    prompt: ''
 });
 
 const client = new net.Socket();
+const PROMPT_END = '__PROMPT_END__';
+
+// modes: MENU (comandos) o INTERACTIVE (preguntas del servidor)
+let mode = 'MENU';
 
 // ======================================================
-// Conexión al servidor
+// Conexión
 // ======================================================
 client.connect(8080, 'localhost', () => {
     console.log('🔌 Conectado al servidor TCP (localhost:8080)');
 });
 
+// ======================================================
+// Manejo de mensajes desde el servidor
+// ======================================================
 client.on('data', (data) => {
-    const msg = data.toString();
+    const rawMsg = data.toString();
 
-    console.log('\n📨 **RESPUESTA DEL SERVIDOR**');
-    console.log(msg);
+    // Si incluye la marca PROMPT_END → respuesta final
+    if (rawMsg.includes(PROMPT_END)) {
+        const cleanMsg = rawMsg.replace(PROMPT_END, '').trim();
 
-    // Si el servidor anuncia que va a cerrar, no mostramos menú
-    if (msg.includes("Conexión cerrada")) {
+        console.log('\n     📨      **RESPUESTA DEL SERVIDOR**      ');
+        console.log(cleanMsg);
+
+        // Si el servidor anuncia cierre, terminar cliente
+        if (cleanMsg.toLowerCase().includes('conexión cerrada')) {
+            try { rl.close(); } catch {}
+            return;
+        }
+
+        // Volvemos a modo MENU
+        mode = 'MENU';
+
+        // Mostrar prompt
+        console.log("👉 Escribe un comando:");
         return;
     }
 
-    // Mostrar menú de nuevo SOLO cuando el servidor termina de responder
-    showMenu();
+    // Si no contiene PROMPT_END → es un mensaje parcial
+    console.log('\n📨 **RESPUESTA PARCIAL DEL SERVIDOR**');
+    console.log(rawMsg);
+
+    // Pasamos a modo interactivo
+    mode = 'INTERACTIVE';
 });
 
+// ======================================================
+// Eventos del socket
+// ======================================================
 client.on('close', () => {
-    console.log('🔌 Conexión cerrada por el servidor.');
-    rl.close();
+    console.log("🔌 Conexión cerrada.");
+    try { rl.close(); } catch {}
 });
 
 client.on('error', (err) => {
     console.error('❌ Error de conexión:', err.message);
-    rl.close();
+    try { rl.close(); } catch {}
 });
 
 // ======================================================
-// MENÚ DEL CLIENTE
+// Lectura de comandos por consola
 // ======================================================
-function showMenu() {
-    console.log('\n📘 **COMANDOS DISPONIBLES**');
-    console.log(
-        "GET BOOKS | GET AUTHORS | GET PUBLISHERS | SEARCH BOOK | SEARCH AUTHOR\n" +
-        "ADD BOOK | ADD AUTHOR | ADD PUBLISHER | EXIT\n"
-    );
+rl.on('line', (input) => {
+    const line = input.trim();
+    if (!line) return;
 
-    rl.question('👉 Escribe un comando: ', (answer) => {
-        const cmd = answer.trim();
-        if (!cmd) return showMenu();
+    if (mode === 'MENU') {
+        client.write(line);
+        return;
+    }
 
-        client.write(cmd);
+    if (mode === 'INTERACTIVE') {
+        client.write(line);
+        return;
+    }
 
-        if (cmd.toUpperCase() === 'EXIT') {
-            // Dejamos que el servidor cierre la conexión con su mensaje
-        }
-    });
-};
+    client.write(line);
+});

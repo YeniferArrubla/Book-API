@@ -1,5 +1,15 @@
 module.exports = {
-    // Lista bonita sin mostrar JSON
+
+        // MENÚ PRINCIPAL
+    formatMenu() {
+        return (
+            "📘 **COMANDOS DISPONIBLES**\n" +
+            "GET BOOKS | GET AUTHORS | GET PUBLISHERS | SEARCH BOOK | SEARCH AUTHOR\n" +
+            "ADD BOOK | ADD AUTHOR | ADD PUBLISHER | EXIT\n"
+        );
+    },
+
+    // Listas no en formato json
     formatList(items, label) {
         if (!items || items.length === 0) {
             return `No hay ${label} registrados.\n`;
@@ -10,12 +20,12 @@ module.exports = {
         items.forEach((item, index) => {
             if (label === 'libros') {
                 // Mostrar título (año) - autor - editorial
-                output += `${index + 1}. ${item.title} (${item.year}) — ${item.authorName} — ${item.publisherName}\n`;
+                output += `${index + 1}. 📚  ${item.title} (${item.year}) — 👤  ${item.authorName} — 🏢  ${item.publisherName}\n`;
             } else if (label === 'autores') {
-                // Mostrar nombre (nacionalidad opcional)
-                output += `${index + 1}. ${item.name}${item.nationality ? ' (' + item.nationality + ')' : ''}\n`;
+                // Mostrar nombre
+                output += `${index + 1}. 👤 ${item.name}\n`;
             } else if (label === 'editoriales') {
-                output += `${index + 1}. ${item.name}\n`;
+                output += `${index + 1}. 🏢 ${item.name}\n`;
             }
         });
 

@@ -1,22 +1,38 @@
 [
   {
     "id": "8ffafd15-3040-460b-8844-f15c109b7901",
-    "name": "C.S. Lewis",
-    "nationality": ""
+    "name": "C.S. Lewis"
   },
   {
     "id": "c911c0e7-a797-404e-8069-f35b90c52298",
-    "name": "Gabriel García Marquez",
-    "nationality": ""
+    "name": "Gabriel García Marquez"
   },
   {
     "id": "c3949dbb-d4e1-49da-b843-a2ac62d5711e",
-    "name": "Miguel de Cervantes",
-    "nationality": ""
+    "name": "Miguel de Cervantes"
   },
   {
     "id": "91d99b88-e7c4-49b7-8a39-eb4130337697",
-    "name": "Jane Austen",
-    "nationality": ""
+    "name": "Jane Austen"
+  },
+  {
+    "id": "c10a09e8-001b-4785-819e-996c1c35a77f",
+    "name": "Sofia Ruth Fisher"
+  },
+  {
+    "id": "40eaaf38-2c6c-417c-959a-9303c220813e",
+    "name": "Jessica Noelia Merep"
+  },
+  {
+    "id": "7b95739e-bac7-492b-b007-9262a9e105c6",
+    "name": "Isabel"
+  },
+  {
+    "id": "8b320e46-6228-4592-b589-a21df63f8a4c",
+    "name": "Stephenie Meyer"
+  },
+  {
+    "id": "0bbf9fce-61f0-44e1-9716-70e18fc17759",
+    "name": "Alicia Diaz"
   }
 ]

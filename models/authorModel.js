@@ -42,8 +42,7 @@ function addAuthor(authorData) {
         // Crear nuevo autor
         const newAuthor = {
             id: uuidv4(),
-            name: nameNormalized,
-            nationality: authorData.nationality || ''
+            name: nameNormalized
         };
 
         authors.push(newAuthor);

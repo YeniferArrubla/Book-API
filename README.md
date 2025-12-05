@@ -1,16 +1,11 @@
 # 📚 Book API – TCP Server
 
-Este proyecto es una **API de gestión de biblioteca básica**, construida usando **Node.js** y comunicación mediante **sockets TCP** (módulo `net`).Envía comandos como:
+Este proyecto es una **API de gestión de biblioteca básica**, construida usando **Node.js** y comunicación mediante **sockets TCP** (módulo `net`).
 
-GET BOOKS
-ADD BOOK
-GET AUTHORS
-ADD AUTHOR
-GET PUBLISHERS
-ADD PUBLISHER
-SEARCH BOOK
-SEARCH AUTHOR
-EXIT
+Con los comandos:
+
+GET BOOKS | GET AUTHORS | GET PUBLISHERS | SEARCH BOOK | SEARCH AUTHOR
+ADD BOOK | ADD AUTHOR | ADD PUBLISHER | EXIT
 
 El objetivo del proyecto es practicar:
 
@@ -23,7 +18,7 @@ El objetivo del proyecto es practicar:
 - Node.js nativo para principiantes
 
 ## 📁 Estructura del Proyecto
-
+```
 book-api/
 ├── controllers/
 │ ├── authorController.js
@@ -41,7 +36,7 @@ book-api/
 │ └── publishers.json
 ├── server.js
 └── client.js
-
+```
 ## ⚙️ Requisitos / Dependencias
 
 - Node.js
@@ -52,7 +47,7 @@ Instalar `uuid` (si aún no está en tu `node_modules`):
 npm install uuid
 readline y net son módulos nativos de Node.js, no requieren instalación.
 
-▶️ Cómo ejecutar
+## ▶️ Cómo ejecutar
 En una terminal, iniciar el servidor:
 
 node server.js
@@ -62,11 +57,11 @@ En otra terminal, iniciar el cliente:
 node client.js
 
 
-🧭 Comandos disponibles
+## 🧭 Comandos disponibles
 
-GET BOOKS — Lista todos los libros (formato bonito, sin mostrar IDs).
+GET BOOKS — Lista todos los libros.
 
-GET AUTHORS — Lista todos los autores (nombre y nacionalidad si existe).
+GET AUTHORS — Lista todos los autores.
 
 GET PUBLISHERS — Lista todas las editoriales.
 
@@ -74,7 +69,7 @@ ADD BOOK — Proceso interactivo (título → año → autor → editorial).
 
 El servidor crea autor/editorial automáticamente si no existen.
 
-ADD AUTHOR — Proceso interactivo para crear autor (puedes indicar Nombre | Nacionalidad).
+ADD AUTHOR — Proceso interactivo para crear autor.
 
 ADD PUBLISHER — Proceso interactivo para crear editorial.
 
@@ -87,7 +82,7 @@ EXIT — Cierra la conexión del cliente.
 Los comandos se aceptan en mayúsculas o minúsculas (el servidor normaliza).
 
 
-🔎 Funcionalidad de BÚSQUEDA
+#### 🔎 Funcionalidad de BÚSQUEDA
 
 SEARCH BOOK
 Inicia un modo interactivo que pide un término.
@@ -100,7 +95,7 @@ Ejemplo de uso:
 
 > SEARCH BOOK
 🔎 Escribe término para buscar libro (título o autor):
-> cien
+
 Lista de libros:
 1. Cien años de soledad (1967) — Gabriel García Márquez — Sudamericana
 
@@ -115,11 +110,12 @@ Ejemplo de uso:
 
 > SEARCH AUTHOR
 🔎 Escribe nombre o término para buscar autor:
-> gabriel garcia marq
-Lista de autores:
-1. Gabriel García Márquez (Colombia)
+> Gabriel García Márquez
 
-🧱 Cómo están implementadas las búsquedas (breve)
+Lista de autores:
+1. Gabriel García Márquez.
+
+#### 🧱 Cómo están implementadas las búsquedas
 
 controllers/bookController.js → función searchBooks(term) que llama a models/booksModel.searchBooksByTerm(term) y devuelve array de coincidencias.
 
@@ -127,7 +123,7 @@ controllers/authorController.js → función searchAuthorByName(term) que usa mo
 
 views/responseFormatter.js formatea el resultado en listas amigables para enviar al cliente.
 
-🛡️ Validaciones implementadas
+## 🛡️ Validaciones implementadas
 
 No se permiten duplicados de autores (por nombre exacto, case-insensitive).
 
@@ -154,7 +150,7 @@ Cliente> ADD BOOK
 > Cien años de soledad
 🗓️ Escribe el año de publicación:
 > 1967
-👤 Escribe el nombre del autor (o 'Nombre | Nacionalidad'):
+👤 Escribe el nombre del autor
 > Gabriel García Márquez
 🏢 Escribe el nombre de la editorial:
 > Sudamericana

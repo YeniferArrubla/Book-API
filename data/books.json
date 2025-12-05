@@ -34,5 +34,23 @@
     "authorName": "Jane Austen",
     "publisherId": "0a219437-10f7-4ccc-9a86-2f766f0bed34",
     "publisherName": "Austral"
+  },
+  {
+    "id": "ec854046-dbe5-4bff-845b-ceb8ec40400e",
+    "title": "Como sobrevivir al backend",
+    "year": "2025",
+    "authorId": "c10a09e8-001b-4785-819e-996c1c35a77f",
+    "authorName": "Sofia Ruth Fisher",
+    "publisherId": "9d314945-92ac-402b-abe5-95f45907a418",
+    "publisherName": "MarDel"
+  },
+  {
+    "id": "d6365678-f11a-413e-bc5d-4790c72cd99e",
+    "title": "Crepúsculo",
+    "year": "2005",
+    "authorId": "8b320e46-6228-4592-b589-a21df63f8a4c",
+    "authorName": "Stephenie Meyer",
+    "publisherId": "6d36b0f0-25a1-419c-9e25-0077cb78634b",
+    "publisherName": "Alfaguara"
   }
 ]
