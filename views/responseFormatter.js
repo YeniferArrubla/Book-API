@@ -2,11 +2,10 @@ module.exports = {
 
         // MENÚ PRINCIPAL
     formatMenu() {
-        return (
-            "📘 **COMANDOS DISPONIBLES**\n" +
-            "GET BOOKS | GET AUTHORS | GET PUBLISHERS | SEARCH BOOK | SEARCH AUTHOR\n" +
-            "ADD BOOK | ADD AUTHOR | ADD PUBLISHER | EXIT\n"
-        );
+        return (`🎮      **COMANDOS DISPONIBLES**         🎮
+    GET BOOKS | GET AUTHORS | GET PUBLISHERS | SEARCH BOOK | SEARCH AUTHOR
+    ADD BOOK  | ADD AUTHOR  | ADD PUBLISHER  | EXIT
+        `);
     },
 
     // Listas no en formato json
@@ -46,7 +45,7 @@ module.exports = {
                 `   📚  Título: ${item.title}\n` +
                 `   🗓️  Año: ${item.year}\n` +
                 `   ✍️  Autor: ${item.authorName}\n` +
-                `   🏢  Editorial: ${item.publisherName}\n\n`
+                `   🏢  Editorial: ${item.publisherName}\n`
             );
         }
 

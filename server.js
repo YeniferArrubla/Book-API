@@ -23,7 +23,7 @@ const server = net.createServer((socket) => {
     clientState[socket.remotePort] = { mode: null, temp: {} };
 
     // Bienvenida inicial + menú
-    socket.write("📘 Bienvenido a la Book API CLI\n");
+    socket.write("\n 📘 Bienvenido a la Book API CLI📘 \n");
     sendMenu(socket);
 
     // Manejo de mensajes del cliente

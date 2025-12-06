@@ -3,10 +3,10 @@
 Este proyecto es una **API de gestión de biblioteca básica**, construida usando **Node.js** y comunicación mediante **sockets TCP** (módulo `net`).
 
 Con los comandos:
-
+```
 GET BOOKS | GET AUTHORS | GET PUBLISHERS | SEARCH BOOK | SEARCH AUTHOR
-ADD BOOK | ADD AUTHOR | ADD PUBLISHER | EXIT
-
+ADD BOOK  | ADD AUTHOR  | ADD PUBLISHER  | EXIT
+```
 El objetivo del proyecto es practicar:
 
 - Manejo de sockets TCP  
@@ -75,14 +75,14 @@ ADD PUBLISHER — Proceso interactivo para crear editorial.
 
 SEARCH BOOK — Busca libros por término (coincide en título o autor; interactivo).
 
-SEARCH AUTHOR — Busca autor por nombre (interactivo).
+SEARCH AUTHOR — Busca autor por nombre completo y exacto (interactivo).
 
 EXIT — Cierra la conexión del cliente.
 
 Los comandos se aceptan en mayúsculas o minúsculas (el servidor normaliza).
 
 
-#### 🔎 Funcionalidad de BÚSQUEDA
+### 🔎 Funcionalidad de BÚSQUEDA
 
 SEARCH BOOK
 Inicia un modo interactivo que pide un término.
@@ -96,21 +96,24 @@ Ejemplo de uso:
 > SEARCH BOOK
 🔎 Escribe término para buscar libro (título o autor):
 
+Cien
+
 Lista de libros:
 1. Cien años de soledad (1967) — Gabriel García Márquez — Sudamericana
 
 SEARCH AUTHOR
-Inicia modo interactivo que pide un nombre o término.
+Inicia modo interactivo que pide un nombre
 
 Busca autores por coincidencia exacta (case-insensitive).
 
-Devuelve una lista de autores (puede incluir nacionalidad si existe).
+Devuelve una lista de autores.
 
 Ejemplo de uso:
 
 > SEARCH AUTHOR
 🔎 Escribe nombre o término para buscar autor:
-> Gabriel García Márquez
+
+Gabriel García Márquez
 
 Lista de autores:
 1. Gabriel García Márquez.
@@ -131,18 +134,19 @@ No se permiten duplicados de editoriales (por nombre exacto).
 
 No se permiten duplicados de libros (mismo título y mismo autor).
 
-Manejo de errores en modelos y controladores con mensajes claros (en español).
+Manejo de errores en modelos y controladores con mensajes claros.
 
 IDs generados automáticamente con uuid (no visibles en la salida del cliente).
 
-📝 Consejo
+#### 📝 Consejo
 Mantén una terminal con server.js y otra para client.js.
 
-✅ Ejemplo rápido de sesión (resumen)
+## ✅ Ejemplo rápido de sesión (resumen)
 
+```
 Cliente> ADD AUTHOR
-✍️ Escribe el nombre del autor (o 'Nombre | Nacionalidad'):
-> Gabriel García Márquez | Colombia
+✍️ Escribe el nombre del autor:
+> Gabriel García Márquez
 ✔️ Autor creado: Gabriel García Márquez
 
 Cliente> ADD BOOK
@@ -155,10 +159,10 @@ Cliente> ADD BOOK
 🏢 Escribe el nombre de la editorial:
 > Sudamericana
 ✔️ Libro agregado correctamente:
-   Título: Cien años de soledad
-   Año: 1967
-   Autor: Gabriel García Márquez
-   Editorial: Sudamericana
+📚 Título: Cien años de soledad
+🗓️ Año: 1967
+👤 Autor: Gabriel García Márquez
+🏢 Editorial: Sudamericana
 
 Cliente> SEARCH BOOK
 🔎 Escribe término para buscar libro (título o autor):
@@ -168,3 +172,4 @@ Lista de libros:
 
 Cliente> EXIT
 🔌 Conexión cerrada por el servidor. ¡Adiós!
+```
